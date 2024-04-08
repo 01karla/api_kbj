@@ -4,7 +4,8 @@ const connection = mysql.createConnection({
 host:'databases.000webhost.com',
 user: 'id21144240_kbj_api',
 password:'Karla099#',
-database:'id21144240_kbj_api'
+database:'id21144240_kbj_api',
+family: 'IPv4'
 });
 connection.connect((err)=>{
     if (err){
