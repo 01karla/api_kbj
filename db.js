@@ -1,7 +1,7 @@
 const mysql = require ('mysql');
 
 const connection = mysql.createConnection({
-host: 'localhost',
+host: 'https://mx148.hostgator.mx:2083/',
 user: 'uniutvts_kbj_bd',
 password:'KarlaGarcia#',
 database:'uniutvts_kbj'
