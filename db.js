@@ -1,11 +1,10 @@
 const mysql = require ('mysql');
 
 const connection = mysql.createConnection({
-host: 'databases.000webhost.com',
-user: 'id21144240_kbj_api',
-password:'Karla099#',
-database:'id21144240_kbj_api',
-family: 'IPv4'
+host: 'https://mx148.hostgator.mx/',
+user: 'uniutvts_kbj_bd',
+password:'KarlaGarcia#',
+database:'uniutvts_kbj'
 });
 connection.connect((err)=>{
     if (err){
