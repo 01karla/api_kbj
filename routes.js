@@ -117,17 +117,32 @@ router.get('/letra', (req, res) => {
 // obtener un registro por su id 
 router.get('/letra/:id_abecedario', (req, res) => {
     const id_abecedario = req.params.id_abecedario;
+
+    // Ejecutar la consulta SELECT
     connection.query('SELECT * FROM abecedario WHERE id_abecedario = ?', id_abecedario, (err, results) => {
         if (err) {
             console.error('Error al obtener el registro:', err);
             res.status(500).json({ error: 'Error al obtener el registro' });
             return;
         }
-        if(results.length === 0) {
-            res.status(404).json({ error: 'registro no encontrado'});
+        if (results.length === 0) {
+            res.status(404).json({ error: 'registro no encontrado' });
             return;
         }
-        res.json(results[0]);
+
+        // Insertar los datos en la tabla historial_letra
+        const fechaActual = new Date().toISOString().slice(0, 19).replace('T', ' '); // Obtener la fecha actual en formato MySQL
+        connection.query('INSERT INTO historial_letra (id_abecedario, fecha) VALUES (?, ?)', [id_abecedario, fechaActual], (err, insertResult) => {
+            if (err) {
+                console.error('Error al guardar en el historial:', err);
+                res.status(500).json({ error: 'Error al guardar en el historial' });
+                return;
+            }else{
+                console.log('consulta guardada en la tabla historial_letra');
+            }
+            // Si la inserción es exitosa, enviar los resultados de la consulta al cliente
+            res.json(results[0]);
+        });
     });
 });
 
