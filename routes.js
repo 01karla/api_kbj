@@ -73,19 +73,16 @@ router.delete('/admin/:id_admin', (req, res) => {
 });
 
 // obtener todos los registros de dos tablas 
-router.get('/datos',(req,res)=>{
-    connection.query('SELECT car.id_carrera AS id, car.nombre AS carrera, gru.nombre AS grupo '+
-    'FROM tb_carrera AS car, tb_grupos AS gru '+
-    'WHERE car.id_carrera=gru.id_carrera',(err,results)=>{
-        if (err){
-            console.error('error al obtener los registros:',err);
-            res.status(500).json({error: 'error al obtener registros '});
+router.get('/datos', (req, res) => {
+    connection.query('SELECT abe.letra AS letra, his.fecha AS fecha FROM abecedario AS abe INNER JOIN historial_letra AS his ON abe.id_abecedario = his.id_abecedario', (err, results) => {
+        if (err) {
+            console.error('Error al obtener los registros:', err);
+            res.status(500).json({ error: 'Error al obtener registros' });
             return;
         }
         res.json(results);
     });
 });
-
 
 //----------------------------- RUTAS PARA LA TABLA ABECEDARIO------
 
